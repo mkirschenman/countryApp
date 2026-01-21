@@ -1,10 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function App() {
+const router = useRouter();
+//start countries app here main screen
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Start!</Text>
+      <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
       <StatusBar style="auto" />
     </View>
   );
