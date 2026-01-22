@@ -23,10 +23,10 @@ export default function AppIndex() {
 
     if (isLoading) return <Text>loading...</Text>;
     if (error) return <Text>An error occurred, please retry</Text>;
-
+    //testing whether push is working now
     return (
       <View style={styles.container}>
-        <Text>Start3!</Text>
+        <Text>Start4!</Text>
         <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
         <StatusBar style="auto" />
       </View>
