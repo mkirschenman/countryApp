@@ -15,16 +15,29 @@ const retrieveCountries = async () => {
 export default function AppIndex() {
   const router = useRouter();
 
-  const displayCountries = (data:any):ReactElement=>{
+  const displayCountries = (data:any[]):ReactElement=>{
   return <View>
      { 
-     data.map((entry:any[], index)=>{
+     data.map((entry, index)=>{
         return <View key ={index}>
           <Text style={{textAlign: "center"}}>{`${entry.flag} ${entry.name.common}`}</Text>
           <Text style={{textAlign: "center"}}>{`Population: ${entry.population}`}</Text>
           <Text style={{textAlign: "center"}}>{`Region: ${entry.region}`}</Text>
           <Text style={{textAlign: "center"}}>{`Capitol ${entry.capital[0]}`}</Text>
-          <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{router.push('/moreInformationPage')}}></Button>
+          <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{
+            router.push({pathname: '/moreInformationPage', 
+              params: {
+              name: entry.name.common,
+              nameOfficial: entry.name.official,
+              population: entry.population,
+              region: entry.region,
+              subRegion: entry.subregion,
+              timeZones: entry.timezones,
+              languages: entry.languages,
+              borders: entry.borders,
+              capital: entry.capital,
+              currencies: entry.currencies,
+            }})}}></Button>
         </View>
       })
     }
