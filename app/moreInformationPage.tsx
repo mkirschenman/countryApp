@@ -27,8 +27,10 @@ export default function MoreInformation({}) {
         {favoritesComponent()}
           <View style={styles.container}>
             {displayExtraDetails(params)}
-           <Button title ="Back To List " onPress={()=>{router.back()}}></Button> 
           <StatusBar style="auto" />
+        </View>
+        <View style = {{padding: 10}}>
+        <Button title ="Back To List " onPress={()=>{router.back()}}></Button> 
         </View>
       </ScrollView>
     );

@@ -23,12 +23,15 @@ export default function AppIndex() {
     {favoritesComponent()} 
      { 
      data.map((entry, index)=>{
-        return <View key ={index} style={{padding: 10}}>
-          <Text style={{textAlign: "center"}}>{`${entry.flag} ${entry.name.common}`}</Text>
-          <Text style={{textAlign: "center"}}>{`Population: ${entry.population}`}</Text>
-          <Text style={{textAlign: "center"}}>{`Region: ${entry.region}`}</Text>
-          <Text style={{textAlign: "center"}}>{`Capitol ${entry.capital[0]}`}</Text>
-          <Button title = {`Make ${entry.name.common} My Favorite`} onPress={()=>{toggleFavorites(entry.name.common)}}></Button>
+        return <View key ={index}>
+          <Text style={{textAlign: "center", paddingBottom: 10, fontSize: 20}}>{`${entry.flag} ${entry.name.common}`}</Text>
+          <Text style={{textAlign: "center", padding: 3}}>{`Population: ${entry.population}`}</Text>
+          <Text style={{textAlign: "center", padding: 3}}>{`Region: ${entry.region}`}</Text>
+          <Text style={{textAlign: "center", paddingTop: 3 }}>{`Capital ${entry.capital[0]}`}</Text>
+          <View style={{padding: 10}}>
+            <Button title = {`Make ${entry.name.common} My Favorite`} onPress={()=>{toggleFavorites(entry.name.common)}}></Button>
+          </View>
+          <View style={{paddingHorizontal: 10,paddingBottom: 30}}>
             <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{
               router.push({pathname: '/moreInformationPage', 
                 params: {
@@ -43,7 +46,8 @@ export default function AppIndex() {
                 capital: entry.capital,
                 currencies: entry.currencies,
               }})}}></Button>
-            </View>
+          </View>
+        </View>
       })
     }
   </View>
