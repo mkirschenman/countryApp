@@ -12,24 +12,24 @@ const retrieveCountries = async () => {
   return response.json();
 };
 
-const displayCountries = (data:any):ReactElement=>{
+export default function AppIndex() {
+  const router = useRouter();
+
+  const displayCountries = (data:any):ReactElement=>{
   return <View>
      { 
-     data.map((entry:any[])=>{
-        return <>
+     data.map((entry:any[], index)=>{
+        return <View key ={index}>
           <Text style={{textAlign: "center"}}>{`${entry.flag} ${entry.name.common}`}</Text>
           <Text style={{textAlign: "center"}}>{`Population: ${entry.population}`}</Text>
           <Text style={{textAlign: "center"}}>{`Region: ${entry.region}`}</Text>
           <Text style={{textAlign: "center"}}>{`Capitol ${entry.capital[0]}`}</Text>
-          <Button title ={`More Information on ${entry.name.common}`} onPress={()=>{router.navigate('')}}></Button>
-        </>
+          <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{router.push('/moreInformationPage')}}></Button>
+        </View>
       })
     }
   </View>
 }
-
-export default function AppIndex() {
-  const router = useRouter();
 
   const { data, error, isLoading } = useQuery({
       queryKey: [""],
@@ -45,7 +45,6 @@ export default function AppIndex() {
       <ScrollView>
         <View style={styles.container}>
           {displayCountries(jsonData)}
-          <Button title ="Button " onPress={()=>{router.push('myapp/moreInformationPage.tsx')}}></Button>
           <StatusBar style="auto" />
         </View>
       </ScrollView>
