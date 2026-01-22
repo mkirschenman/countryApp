@@ -44,7 +44,6 @@ export default function AppIndex() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text>A List Of Countries</Text>
           {displayCountries(jsonData)}
           <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
           <StatusBar style="auto" />
