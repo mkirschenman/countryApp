@@ -16,7 +16,13 @@ const displayCountries = (data:any):ReactElement=>{
   return <View>
      { 
      data.map((entry:any[])=>{
-        return <Text>{entry.name.common}</Text>
+        return <>
+          <Text style={{textAlign: "center"}}>{`${entry.flag} ${entry.name.common}`}</Text>
+          <Text style={{textAlign: "center"}}>{`Population: ${entry.population}`}</Text>
+          <Text style={{textAlign: "center"}}>{`Region: ${entry.region}`}</Text>
+          <Text style={{textAlign: "center"}}>{`Capitol ${entry.capital[0]}`}</Text>
+          <Button title ={`More Information on ${entry.name.common}`} onPress={()=>{router.navigate('')}}></Button>
+        </>
       })
     }
   </View>
