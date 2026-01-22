@@ -9,8 +9,8 @@ export default function MoreInformation({}) {
   const params = useLocalSearchParams();
 
     const displayExtraDetails = (data:any):ReactElement=>{
-    return <View>
-           <Text style={{textAlign: "center"}}>{`${params.name}`}</Text>
+    return <View style={{backgroundColor: "#98919165", margin: 10, paddingBottom: 10, borderRadius:10, marginHorizontal:10}}>
+           <Text style={{textAlign: "center", padding: 10, fontSize: 20}}>{`${params.name}`}</Text>
            <Text style={{textAlign: "center"}}>{`Officail Name: ${params.name}`}</Text>
             <Text style={{textAlign: "center"}}>{`Population: ${params.population}`}</Text>
             <Text style={{textAlign: "center"}}>{`Region: ${params.region}`}</Text>
@@ -25,10 +25,7 @@ export default function MoreInformation({}) {
     return (
       <ScrollView>
         {favoritesComponent()}
-          <View style={styles.container}>
-            {displayExtraDetails(params)}
-          <StatusBar style="auto" />
-        </View>
+        {displayExtraDetails(params)}
         <View style = {{padding: 10}}>
         <Button title ="Back To List " onPress={()=>{router.back()}}></Button> 
         </View>
