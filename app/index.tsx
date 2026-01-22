@@ -1,9 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView} from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQuery } from "@tanstack/react-query";
-import React from 'react';
-
+import React, { ReactElement } from 'react';
 
 const retrieveCountries = async () => {
   const response = await fetch("https://restcountries.com/v3.1/all?fields=name,population,region,capital,subregion,languages,timezones,currencies,borders,flag");
@@ -13,23 +12,38 @@ const retrieveCountries = async () => {
   return response.json();
 };
 
+const displayCountries = (data:any):ReactElement=>{
+  return <View>
+     { 
+     data.map((entry:any[])=>{
+        return <Text>{entry.name.common}</Text>
+      })
+    }
+  </View>
+}
+
 export default function AppIndex() {
   const router = useRouter();
 
   const { data, error, isLoading } = useQuery({
-      queryKey: ["postsData"],
+      queryKey: [""],
       queryFn: retrieveCountries,
     });
 
     if (isLoading) return <Text>loading...</Text>;
     if (error) return <Text>An error occurred, please retry</Text>;
-    //testing whether push is working now
+
+    const jsonData = JSON.parse(JSON.stringify(data));
+
     return (
-      <View style={styles.container}>
-        <Text>Start4!</Text>
-        <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
-        <StatusBar style="auto" />
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text>A List Of Countries</Text>
+          {displayCountries(jsonData)}
+          <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
+          <StatusBar style="auto" />
+        </View>
+      </ScrollView>
     );
 }
 
