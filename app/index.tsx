@@ -45,7 +45,7 @@ export default function AppIndex() {
       <ScrollView>
         <View style={styles.container}>
           {displayCountries(jsonData)}
-          <Button title ="Button " onPress={()=>{router.navigate('')}}></Button>
+          <Button title ="Button " onPress={()=>{router.push('myapp/moreInformationPage.tsx')}}></Button>
           <StatusBar style="auto" />
         </View>
       </ScrollView>
