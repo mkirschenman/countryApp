@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, ScrollView, Button, Text} from 'react-native';
 import React, { ReactElement } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { favoritesComponent } from './contextProvider';
 
 export default function MoreInformation({}) {
   const router = useRouter();
@@ -23,7 +24,8 @@ export default function MoreInformation({}) {
     }
     return (
       <ScrollView>
-        <View style={styles.container}>
+        {favoritesComponent()}
+          <View style={styles.container}>
             {displayExtraDetails(params)}
            <Button title ="Back To List " onPress={()=>{router.back()}}></Button> 
           <StatusBar style="auto" />
