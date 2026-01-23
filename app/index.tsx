@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import React, { ReactElement } from 'react';
 import { favoritesComponent, useFavorites } from './contextProvider';
 
+//Calls to retrieve the countries data from the API, 
+//checks to see if the response is ok before returning the json data
 const retrieveCountries = async () => {
   const response = await fetch("https://restcountries.com/v3.1/all?fields=name,population,region,capital,subregion,languages,timezones,currencies,borders,flag");
   if (!response.ok) {
@@ -13,11 +15,12 @@ const retrieveCountries = async () => {
   return response.json();
 };
 
+//App Entry point
 export default function AppIndex() {
-  const router = useRouter();
-  const {toggleFavorites} = useFavorites();
+  const router = useRouter(); //router needed to navigate
+  const {toggleFavorites} = useFavorites(); //hook to be able to toggle favorites
 
-
+//This function displays all of the countries from the api data
   const displayCountries = (data:any[]):ReactElement=>{
   return <View>
     {favoritesComponent()} 
@@ -29,9 +32,11 @@ export default function AppIndex() {
           <Text style={styles.textCenter}>{`Region: ${entry.region}`}</Text>
           <Text style={styles.textCenter}>{`Capital ${entry.capital[0]}`}</Text>
           <View style={styles.favoritesButton}>
+            {/* This Button will set a new favorite country */}
             <Button title = {`Make ${entry.name.common} My Favorite`} onPress={()=>{toggleFavorites(entry.name.common)}}></Button>
           </View>
           <View style={styles.InfoButton}>
+             {/* This Button will send you to the more information screen */}
             <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{
               router.push({pathname: '/moreInformationPage', 
                 params: {
@@ -52,7 +57,8 @@ export default function AppIndex() {
     }
   </View>
 }
-
+ 
+//Sets up the query for use, helps to check if we have an error or are in loading status
   const { data, error, isLoading } = useQuery({
       queryKey: [""],
       queryFn: retrieveCountries,
@@ -73,6 +79,7 @@ export default function AppIndex() {
     );
 }
 
+//styles for the main screen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
