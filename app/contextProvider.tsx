@@ -1,5 +1,5 @@
 import React, { createContext, ReactElement, useContext, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 export const FavoriteContext = createContext<String | undefined>(undefined);
 
@@ -23,5 +23,15 @@ export const useFavorites = () => {
 
 export const favoritesComponent = (): ReactElement => {
   const {favorites} = useFavorites();
-  return <View style={{backgroundColor: "rgba(53, 208, 63, 0.27)", padding: 10, borderRadius: 5, margin: 10}}><Text>{`Favorites: ${favorites}`}</Text></View>
+  return <View style={styles.favorites}><Text>{`Favorites: ${favorites}`}</Text></View>
 }
+
+const styles = StyleSheet.create({
+  favorites: {
+    backgroundColor: "rgba(53, 208, 63, 0.27)",
+    padding: 10,
+    borderRadius: 5,
+    margin: 10
+  }
+  
+});

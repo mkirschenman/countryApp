@@ -23,15 +23,15 @@ export default function AppIndex() {
     {favoritesComponent()} 
      { 
      data.map((entry, index)=>{
-        return <View key ={index} style={{backgroundColor: "#98919165", marginBottom: 10, borderRadius:10, marginHorizontal:10}}>
-          <Text style={{textAlign: "center", padding: 10, fontSize: 20}}>{`${entry.flag} ${entry.name.common}`}</Text>
-          <Text style={{textAlign: "center", padding: 3}}>{`Population: ${entry.population}`}</Text>
-          <Text style={{textAlign: "center", padding: 3}}>{`Region: ${entry.region}`}</Text>
-          <Text style={{textAlign: "center", paddingTop: 3 }}>{`Capital ${entry.capital[0]}`}</Text>
-          <View style={{padding: 10, paddingBottom: 0}}>
+        return <View key ={index} style={styles.countryContainer}>
+          <Text style={styles.countryName}>{`${entry.flag} ${entry.name.common}`}</Text>
+          <Text style={styles.textCenter}>{`Population: ${entry.population}`}</Text>
+          <Text style={styles.textCenter}>{`Region: ${entry.region}`}</Text>
+          <Text style={styles.textCenter}>{`Capital ${entry.capital[0]}`}</Text>
+          <View style={styles.favoritesButton}>
             <Button title = {`Make ${entry.name.common} My Favorite`} onPress={()=>{toggleFavorites(entry.name.common)}}></Button>
           </View>
-          <View style={{padding: 10}}>
+          <View style={styles.InfoButton}>
             <Button title ={`More Information on ${entry.name.common}`}  onPress={()=>{
               router.push({pathname: '/moreInformationPage', 
                 params: {
@@ -80,4 +80,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  countryContainer: {
+    backgroundColor: "#98919165", 
+    margin: 10, 
+    paddingBottom: 10, 
+    borderRadius:10, 
+    marginHorizontal:10
+  },
+  countryName: {
+    textAlign: "center",
+    padding: 10,
+    fontSize: 20
+  },
+  textCenter: {
+    textAlign: "center",
+    padding: 3
+  },
+  favoritesButton: {
+    padding: 10, 
+    paddingBottom: 0
+  },
+  InfoButton: {
+    padding: 10
+  }
 });
